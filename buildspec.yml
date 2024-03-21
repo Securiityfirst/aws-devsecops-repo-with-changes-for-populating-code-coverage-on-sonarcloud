@@ -1,8 +1,16 @@
 version: 0.2
+env:
+    secrets-manager:
+        TOKEN: thirdsecret:tokenforsonar
 phases:
   install:
     runtime-versions:
       java: latest
   build:
     commands:
-      - mvn verify sonar:sonar -Dsonar.projectKey=javaprojectaws -Dsonar.organization=javaprojectaws -Dsonar.host.url=https://sonarcloud.io -Dsonar.token=37c7ca1a4f2fc567717203d6ffdae0440c64ca92 
+      - mvn verify sonar:sonar -Dsonar.projectKey=batumejavaprojectaws-3 -Dsonar.organization=batumejavaprojectaws-3 -Dsonar.host.url=https://sonarcloud.io -Dsonar.token=$TOKEN
+      - sleep 5
+      - |-
+        quality_status=$(curl -s -u $TOKEN: https://sonarcloud.io/api/qualitygates/project_status?projectKey=batumejavaprojectaws-3 | jq -r '.projectStatus.status')
+        echo "SonarCloud analysistatus is $quality_status";
+        if [ $quality_status = "ERROR" ] ; then exit 1;fi
