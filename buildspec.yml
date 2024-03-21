@@ -8,7 +8,7 @@ phases:
       java: latest
   build:
     commands:
-      - mvn verify sonar:sonar -Dsonar.projectKey=batumejavaprojectaws-3 -Dsonar.organization=batumejavaprojectaws-3 -Dsonar.host.url=https://sonarcloud.io -Dsonar.token=
+      - mvn verify sonar:sonar -Dsonar.projectKey=batumejavaprojectaws-3 -Dsonar.organization=batumejavaprojectaws-3 -Dsonar.host.url=https://sonarcloud.io -Dsonar.token=$TOKEN
       - sleep 5
       - |-
         quality_status=$(curl -s -u $TOKEN: https://sonarcloud.io/api/qualitygates/project_status?projectKey=batumejavaprojectaws-3 | jq -r '.projectStatus.status')
