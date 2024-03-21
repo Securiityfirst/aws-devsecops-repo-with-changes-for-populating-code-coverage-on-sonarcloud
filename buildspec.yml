@@ -1,4 +1,5 @@
 version: 0.2
+env:
     secrets-manager:
         TOKEN: thirdsecret:tokenforsonar
 phases:
@@ -7,7 +8,11 @@ phases:
       java: latest
   build:
     commands:
+<<<<<<< HEAD
       - mvn verify sonar:sonar -Dsonar.projectKey=batumejavaprojectaws-3 -Dsonar.organization=batumejavaprojectaws-3 -Dsonar.host.url=https://sonarcloud.io -Dsonar.token=$TOKEN 
+=======
+      - mvn verify sonar:sonar -Dsonar.projectKey=batumejavaprojectaws-3 -Dsonar.organization=batumejavaprojectaws-3 -Dsonar.host.url=https://sonarcloud.io -Dsonar.token=$TOKEN
+>>>>>>> 2cca91f7416fb7f89b7d4af0a01d397a9e9a7570
       - sleep 5
       - |-
         quality_status=$(curl -s -u $TOKEN: https://sonarcloud.io/api/qualitygates/project_status?projectKey=batumejavaprojectaws-3 | jq -r '.projectStatus.status')
